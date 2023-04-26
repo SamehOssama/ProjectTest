@@ -1,0 +1,19 @@
+//TODO::
+1) Header file for constants and inits{
+    PortF init
+    UART init
+}
+2) Get data from gps (long - lat) maybe (time - speed)??
+3) Calculate distance from gps (long - lat) data
+4) Control leds with calculated distance
+
+Add a feature to make sure the person is walking in the right direction?
+
+At the end:
+Write readme
+Add comments if needed
+
+Bonus:
+Bluetooth + mobile or web app
+LCD display
+better data aquisition (accelorometer or algorithm based) !!!
