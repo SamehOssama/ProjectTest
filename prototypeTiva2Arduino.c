@@ -43,8 +43,7 @@ void digitalPinMode(char port, uint32_t pin, uint32_t mode){
 }
 
 void setup(){
-    digitalPinMode('A', 5, 1);
-    digitalPinMode('D', 2, 0);
+    
 }
 
 void loop(){
