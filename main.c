@@ -24,13 +24,13 @@
 #define GPIO_PORTA_PCTL_R		(*((volatile unsigned long *)0x4000452C))
 
 // UART0
-#define UART0_DR_R			(*((volatile unsigned long *)0x4000C000))
-#define UART0_FR_R			(*((volatile unsigned long *)0x4000C018))
-#define UART0_CTL_R			(*((volatile unsigned long *)0x4000C030))
+#define UART0_DR_R				(*((volatile unsigned long *)0x4000C000))
+#define UART0_FR_R				(*((volatile unsigned long *)0x4000C018))
+#define UART0_CTL_R				(*((volatile unsigned long *)0x4000C030))
 #define UART0_IBRD_R			(*((volatile unsigned long *)0x4000C024))
 #define UART0_FBRD_R			(*((volatile unsigned long *)0x4000C028))
 #define UART0_LCRH_R			(*((volatile unsigned long *)0x4000C02C))
-#define UART0_CC_R			(*((volatile unsigned long *)0x4000CFC8))
+#define UART0_CC_R				(*((volatile unsigned long *)0x4000CFC8))
 
 // LEDS
 #define RED_LED 			0x02
