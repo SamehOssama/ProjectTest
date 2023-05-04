@@ -1,6 +1,6 @@
 #ifndef _TM4C_H
 #define _TM4C_H
-#include "tm4c123gh6ph.h"
+#include "tm4c123gh6pm.h"
 #endif
 
 #ifndef _UART_H
