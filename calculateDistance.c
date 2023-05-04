@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define RADIUS 6371 // radius of earth in kilometers
+#define RADIUS 6371000 // radius of earth in meters
 
 double to_radians(double degrees) {
     return degrees * M_PI / 180.0;
