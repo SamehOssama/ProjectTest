@@ -46,7 +46,7 @@ void uart2_init(unsigned clk,unsigned baudrate)  // for gps
 	  GPIO_PORTD_AFSEL_R |= 0XC0; // enable alt function PD7, PD6
 	  GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R & 0X00FFFFFF) | 0X11000000; // configure uart for pa0,pa1
 	  
-	  UART1_CC_R = 0; 	   // use system clock
+	  UART2_CC_R = 0; 	   // use system clock
 	  UART2_LCRH_R = 0x60; // 8-bit word length, no Fifo , no parity, 1 stop bit
 	  UART2_CTL_R = 0X0301;  // enable RXE,TXE AND UART
 	
@@ -106,11 +106,9 @@ void gps_read()
 			comma_nums++;
 		else if(comma_nums==2)
 		{
-			if(data == 'V')
+			if(data == 'v')
 			{			 
-				      GPRMC_message = 0;
-				      while(data!='\n')
-					     data = uart2_read_byte();
+				     GPRMC_message = 0;
 			       return;
 			}
 		}
@@ -146,6 +144,8 @@ int main(void)
 {
 	// set dist_point
 	
+	
+	uart2_init(16000000,9600);
 
 	while(1)
 	{
