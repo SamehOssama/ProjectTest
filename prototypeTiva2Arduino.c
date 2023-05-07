@@ -1,5 +1,5 @@
 #include "stdint.h"
-#include "M:\Programs\Keil\Keil 4\EE319Kware\inc\tm4c123gh6pm.h"
+#include "tm4c123gh6pm.h"
 
 #define UART0 ((volatile uint32_t *)0x4000C000)
 #define UART1 ((volatile uint32_t *)0x4000D000)
