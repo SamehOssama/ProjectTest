@@ -166,10 +166,9 @@ int main(void)
 	double last_dis = -1;
 	
 	// set dist_point
-	
+	// we will need big delay here (maybe 1 minute or some thing)
 
 	uart2_init(16000000,9600);
-  
 	while(1)
 	{
 		double dis;
