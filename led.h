@@ -15,6 +15,6 @@
 void RGB_set(char mask);
 void RGB_clear(char mask);
 void RGB(char colour);
-void distance_indicator(double current_distance);
+void distance_indicator(int current_distance);
 
 #endif

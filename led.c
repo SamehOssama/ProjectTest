@@ -15,8 +15,8 @@ void RGB(char colour){
 	GPIO_PORTF_DATA_R |= colour;			// Turn on this led
 }
 
-void distance_indicator(double current_distance){
-	if(current_distance == 0){
+void distance_indicator(int current_distance){
+	if(current_distance == 1){
 		RGB(GREEN_LED);
 	} else if(current_distance <= 5){
 		RGB(GREEN_LED | RED_LED);
