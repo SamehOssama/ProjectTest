@@ -18,6 +18,12 @@ void Uart1_transmit(unsigned char data);
 void Uart1_input_string(char *command, int len);
 void Uart1_output_string(char *pt);
 
+void Uart2_init(void);
+char Uart2_receive(void);
+void Uart2_transmit(unsigned char data);
+void Uart2_input_string(char *command, int len);
+void Uart2_output_string(char *pt);
+
 void Uart5_init(void);
 char Uart5_receive(void);
 void Uart5_transmit(unsigned char data);
