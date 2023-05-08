@@ -116,19 +116,27 @@ void Uart1_output_string(char* pt){
 ###############################################################################
 */
 
-void Uart2_init(void){													// PD Rx -> 6 ; Tx -> 7
-	SYSCTL_RCGCUART_R |= SYSCTL_RCGCUART_R2;							// Enable UART2 clock   0010 0100
-	SYSCTL_RCGCGPIO_R |= SYSCTL_RCGCGPIO_R3;							// Enable port D clock
-	while((SYSCTL_PRGPIO_R & SYSCTL_PRGPIO_R3) == 0){};
-	UART5_CTL_R &= ~UART_CTL_UARTEN;									// Disable UART2
-	UART5_IBRD_R = 1000000 / 9600;
-	UART5_FBRD_R =  1000000 % 9600 / 9600.0 * 64 + 0.5;
-	UART5_LCRH_R = (UART_LCRH_WLEN_8 | UART_LCRH_FEN) & ~UART_LCRH_PEN; // 8 bit, no parity, 1 stop, FIFOs
-	UART5_CTL_R = UART_CTL_UARTEN | UART_CTL_TXE | UART_CTL_RXE;		// Enable UART2, Rx, Tx
-	GPIO_PORTD_AFSEL_R |= (1 << 6) | (1 << 7);							// Alternate function PD6 - PD7   1100 0000
-	GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R & 0X00FFFFFF) | 0X11000000;	// Set PCTL for PD6-7 to UART function (Ref P 651)
-	GPIO_PORTD_DEN_R |= (1 << 6) | (1 << 7);							// Enable digital pins PD6-PD7   0011 0000
-	GPIO_PORTD_AMSEL_R &= ~(1 << 6) | (1 << 7); 						// Disable analog function PD6-PD7   0011 0000
+void Uart2_init(void){  // for gps
+	unsigned BRD;
+	SYSCTL_RCGCUART_R |= 0X04; // activate UART2
+	SYSCTL_RCGCGPIO_R |= 0X08; //  activate port D
+	while((SYSCTL_PRGPIO_R & 0X08) == 0){};
+	UART2_CTL_R &= ~(0X0001);   // disable UART
+	BRD = ((16000000<<2) + (9600<<1))/9600; // SET BAUD RATE DIVISOR
+	UART2_IBRD_R = BRD >> 6;
+	UART2_FBRD_R = BRD&63;
+	
+	GPIO_PORTD_LOCK_R = GPIO_LOCK_KEY;  // Unlock port D
+	GPIO_PORTD_CR_R |= 0xC0;  // Allow changes to PD7-PD6
+	GPIO_PORTD_AFSEL_R |= 0XC0; // enable alt function PD7, PD6
+	GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R & 0X00FFFFFF) | 0X11000000; // configure uart for pa0,pa1
+	  
+	UART2_CC_R = 0; 	   // use system clock
+	UART2_LCRH_R = 0x60; // 8-bit word length, no Fifo , no parity, 1 stop bit
+	UART2_CTL_R = 0X0301;  // enable RXE,TXE AND UART
+	
+	GPIO_PORTD_DEN_R |= 0XC0;  // enable digital IO on PD6,PD7
+	GPIO_PORTD_AMSEL_R &= ~0XC0; // disable analog function on PD6, PD7		 
 }
 
 char Uart2_receive(void){
