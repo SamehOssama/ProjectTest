@@ -16,11 +16,14 @@ void RGB(char colour){
 }
 
 void distance_indicator(int current_distance){
-	if(current_distance == 1){
+	if(current_distance <=5){
 		RGB(GREEN_LED);
-	} else if(current_distance <= 5){
-		RGB(GREEN_LED | RED_LED);
-	} else {
+	} else if(current_distance <= 10){
+		RGB(GREEN_LED | RED_LED);	
+	} 
+	  else if(current_distance <= 20)
+			RGB(BLUE_LED);	
+	else {
 		RGB(RED_LED);
 	}
 }
